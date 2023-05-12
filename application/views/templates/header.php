@@ -38,4 +38,20 @@
 	</nav>
 
 	<div class="container">
+      <!-- Flash messages -->
+      <?php if($this->session->flashdata('user_account')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_account').'</p>'; ?>
+      <?php endif; ?>
+
+       <?php if($this->session->flashdata('admin_account')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('admin_account').'</p>'; ?>
+      <?php endif; ?>
+
+       <?php if($this->session->flashdata('product_added')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('product_added').'</p>'; ?>
+      <?php endif; ?>
+
+       <?php if($this->session->flashdata('category_created')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_created').'</p>'; ?>
+      <?php endif; ?>
 		
