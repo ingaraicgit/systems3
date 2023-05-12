@@ -1,0 +1,29 @@
+.post-date{
+	background: #f4f4f4;
+	padding: 4px;
+	margin: 3px 0px;
+	display: block;
+}
+
+.post-thumb{
+	width: 100%;
+}
+
+.flora h1 {
+  text-transform: capitalize;
+  font-size: 58px;
+  font-weight: 600;
+  color: #f5dcda;
+  letter-spacing: 0.5;
+}
+
+.flora h1 span {
+  font-size: 23px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  line-height: 3em;
+  padding-left: 0.25em;
+  color: #f5c3bf;
+  padding-bottom: 60px;
+}
