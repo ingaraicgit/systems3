@@ -14,6 +14,19 @@
 				return $this->db->insert('users', $data);
 			}
 
+			public function login($username, $pass_encrypt2){
+				$this->db->where('username', $username);
+				$this->db->where('password', $pass_encrypt2);
+
+				$result = $this->db->get('users');
+
+				if($result->num_rows() == 1){
+					return $result->row(0)->id; //we need the user id, row index 0 at db
+				}else{
+					return false;
+				}
+
+			}
 
 			public function unique_username($username){
 				$query = $this->db->get_where('users', array('username' => $username));

@@ -13,14 +13,39 @@
 
 	<nav class="navbar navbar-inverse">
 
-		<div class="container">
-			<div class="navbar-header flora">
-				<h1 class= "flora" href="<?php echo base_url(); ?>">
-					Flora
-					<span>Community</span>
-				</h1>
+			<div style="margin: 10px;" class="row">
+
+				<div class="col-md-4">
+					<div class="navbar-header flora">
+						<h1 class= "flora" href="<?php echo base_url(); ?>">Flora<span>Community</span></h1>
+					</div>
+				</div>	
+
+				<div class="col-md-4"></div>
+
+				<div class="col-md-4">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="<?php echo base_url(); ?>admins/login" >Admin Log in</a></li>
+						<li><a href="<?php echo base_url(); ?>admins/register" >Register a shop</a></li>
+					</ul>
+				</div>
+			
+				
+		
 			</div>
-		</div>
+
+			<div class="row">
+
+				<div class="col-md-9"></div>
+
+				<div class="col-md-3" style="padding-right: 70px;">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="<?php echo base_url(); ?>users/login" >Log in</a></li>
+						<li><a href="<?php echo base_url(); ?>users/register" >Sign up</a></li>
+					</ul>
+				</div>
+
+			</div>
 
 		<div id="navbar">
 			<ul class="nav navbar-nav" style="padding-left: 20px;">
@@ -28,16 +53,17 @@
 				<li><a href="<?php echo base_url(); ?>categories">Shop by Category</a></li>
 				<li><a href="<?php echo base_url(); ?>posts">Shop by Product</a></li>
 				<!--<li><a href="<?php echo base_url(); ?>about">Community</a></li>-->
-
 			</ul>
+
 			<ul class="nav navbar-nav navbar-right" style="padding-right: 50px;">
 				<li><a href="<?php echo base_url(); ?>categories/categories_create" >Create Product Category</a></li>
 				<li><a href="<?php echo base_url(); ?>posts/create" >Add Product</a></li>
 			</ul>
+
 		</div>
 	</nav>
 
-	<div class="container">
+	 <div class="container">
       <!-- Flash messages -->
       <?php if($this->session->flashdata('user_account')): ?>
         <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_account').'</p>'; ?>
@@ -53,5 +79,9 @@
 
        <?php if($this->session->flashdata('category_created')): ?>
         <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_created').'</p>'; ?>
+      <?php endif; ?>
+
+			<?php if($this->session->flashdata('login_fail')): ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_fail').'</p>'; ?>
       <?php endif; ?>
 		

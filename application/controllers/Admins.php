@@ -31,6 +31,46 @@
 			}
 		}
 
+		public function login(){
+
+			$data['title'] = 'Admin Log in';
+
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('password','Password','required');
+
+			if($this->form_validation->run() === FALSE){
+				$this->load->view('templates/header');
+				$this->load->view('admins/login',$data);
+				$this->load->view('templates/footer');
+			}else{
+				
+				$username = $this->input->post('username');
+				$pass_encrypt = md5($this->input->post('password'));
+
+				$admin_id = $this->admin_model->login($username, $pass_encrypt);
+
+				if($admin_id){
+
+					$admin_data = array(
+						'admin_id' => $admin_id,
+						'username' => $username,
+						'logged_in' => true
+					);
+					//The Session class permits you to maintain a user’s “state” and track their activity while they browse your site.
+					$this->session->set_userdata($admin_data);
+
+					redirect('posts');
+
+				}else{
+
+					$this->session->set_flashdata('login_fail', 'Login is invalid. Please check your username and password.');
+					redirect('admins/login');	
+				}
+
+			
+			}
+		}
+
 		public function unique_username($username){
 
 			$this->form_validation->set_message('unique_username', 'That username is already taken.');
