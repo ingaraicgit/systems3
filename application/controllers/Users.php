@@ -44,14 +44,15 @@
 				
 				$username = $this->input->post('username');
 				$pass_encrypt2 = md5($this->input->post('password'));
+				$account = "user";
 
 				$user_id = $this->user_model->login($username, $pass_encrypt2);
 
 				if($user_id){
-
 					$user_data = array(
 						'user_id' => $user_id,
 						'username' => $username,
+						'account' => $account,
 						'logged_in' => true
 					);
 					//The Session class permits you to maintain a user’s “state” and track their activity while they browse your site.
@@ -67,6 +68,17 @@
 
 			
 			}
+		}
+
+		public function logout(){
+			//kill session user data
+			$this->session->unset_userdata('logged_in');
+			$this->session->unset_userdata('user_id');
+			$this->session->unset_userdata('username');
+			
+			$this->session->set_flashdata('logout', 'You are logged out.');
+
+			redirect('users/login');
 		}
 
 		public function unique_username($username){

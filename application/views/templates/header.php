@@ -9,56 +9,69 @@
 	<title>Flora</title>
 </head>
 
+
+
 <body>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="container">
+				<div class="navbar-header" >
+					<h1 class= "flora" href="<?php echo base_url(); ?>" style="font: Garamond; color: #772953; letter-spacing: 3px; font-size: 48px;">FLORA <span style="font-size: 24px; letter-spacing: 0.5px;">COMMUNITY</span></h1>
+				</div>			
+			</div>
+		</div>	
+		<div class="col-md-8"> </div>
+	</div>
+
 
 	<nav class="navbar navbar-inverse">
 
-			<div style="margin: 10px;" class="row">
-
-				<div class="col-md-4">
-					<div class="navbar-header flora">
-						<h1 class= "flora" href="<?php echo base_url(); ?>">Flora<span>Community</span></h1>
-					</div>
-				</div>	
-
-				<div class="col-md-4"></div>
-
-				<div class="col-md-4">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo base_url(); ?>admins/login" >Admin Log in</a></li>
-						<li><a href="<?php echo base_url(); ?>admins/register" >Register a shop</a></li>
-					</ul>
-				</div>
 			
-				
-		
-			</div>
+ 		
+ 			<!--user logged in-->
 
-			<div class="row">
-
-				<div class="col-md-9"></div>
-
-				<div class="col-md-3" style="padding-right: 70px;">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo base_url(); ?>users/login" >Log in</a></li>
-						<li><a href="<?php echo base_url(); ?>users/register" >Sign up</a></li>
+			
+					<ul class="nav navbar-nav navbar-right" style="padding-right: 50px;">
+						<?php if($this->session->userdata('logged_in')): ?>
+							<?php if(($this->session->userdata('account')=="user")):?>
+								<li><a href="<?php echo base_url(); ?>users/logout" >Log out</a></li>
+							<?php endif;?>
+							<?php if(($this->session->userdata('account')=="admin")):?>
+								<li><a href="<?php echo base_url(); ?>admins/logout" >Log out</a></li>	
+							<?php endif;?>
+						<?php endif;?>
 					</ul>
-				</div>
+			
+					
+	
+					<ul class="nav navbar-nav navbar-right" >
+						<?php if(!$this->session->userdata('logged_in')): ?>
+							<li><a href="<?php echo base_url(); ?>users/login" >Log in</a></li>
+							<li><a href="<?php echo base_url(); ?>users/register" style="border-right: 1px solid white;" >Sign up</a></li>
+						
+							<li><a href="<?php echo base_url(); ?>admins/login" >Admin Log in</a></li>
+							<li><a href="<?php echo base_url(); ?>admins/register" >Register a shop</a></li>
+						<?php endif;?>
+					</ul>
+			
 
-			</div>
 
 		<div id="navbar">
 			<ul class="nav navbar-nav" style="padding-left: 20px;">
 				<li><a href="<?php echo base_url(); ?>">Home</a></li>
 				<li><a href="<?php echo base_url(); ?>categories">Shop by Category</a></li>
 				<li><a href="<?php echo base_url(); ?>posts">Shop by Product</a></li>
-				<!--<li><a href="<?php echo base_url(); ?>about">Community</a></li>-->
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right" style="padding-right: 50px;">
-				<li><a href="<?php echo base_url(); ?>categories/categories_create" >Create Product Category</a></li>
-				<li><a href="<?php echo base_url(); ?>posts/create" >Add Product</a></li>
-			</ul>
+			<?php if($this->session->userdata('logged_in')): ?>
+      	<?php if(($this->session->userdata('account')=="admin")):?>
+					<ul class="nav navbar-nav navbar-right" style="padding-right: 50px;">
+						<li><a href="<?php echo base_url(); ?>categories/categories_create" >Create Product Category</a></li>
+						<li><a href="<?php echo base_url(); ?>posts/create" style="border-right: 1px solid white;" >Add Product</a></li>
+					</ul>
+				<?php endif;?>
+			<?php endif;?>
 
 		</div>
 	</nav>
@@ -83,5 +96,9 @@
 
 			<?php if($this->session->flashdata('login_fail')): ?>
         <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_fail').'</p>'; ?>
+      <?php endif; ?>
+
+      	<?php if($this->session->flashdata('logout')): ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('logout').'</p>'; ?>
       <?php endif; ?>
 		

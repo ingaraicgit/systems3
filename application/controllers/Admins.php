@@ -46,6 +46,7 @@
 				
 				$username = $this->input->post('username');
 				$pass_encrypt = md5($this->input->post('password'));
+				$account = "admin";
 
 				$admin_id = $this->admin_model->login($username, $pass_encrypt);
 
@@ -54,6 +55,7 @@
 					$admin_data = array(
 						'admin_id' => $admin_id,
 						'username' => $username,
+						'account' => $account,
 						'logged_in' => true
 					);
 					//The Session class permits you to maintain a user’s “state” and track their activity while they browse your site.
@@ -70,6 +72,19 @@
 			
 			}
 		}
+
+		public function logout(){
+			//kill session user data
+			$this->session->unset_userdata('logged_in');
+			$this->session->unset_userdata('admin_id');
+			$this->session->unset_userdata('username');
+			
+			$this->session->set_flashdata('logout', 'You are logged out.');
+
+			redirect('admins/login');
+		}
+
+
 
 		public function unique_username($username){
 
