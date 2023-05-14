@@ -1,8 +1,5 @@
 <!--user-->
 
-
-
-
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('users/register'); ?>
@@ -38,6 +35,11 @@
           	<label>Confirm Password</label>
           	<input type="password" class="form-control" name="password2" placeholder="Retype Password">
         	</div>
+
+         <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" name="address" placeholder="e.g. Street Name 1">
+         </div>
 
         	<div class="form-group">
           	<label>Phone number</label>

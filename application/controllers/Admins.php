@@ -27,7 +27,7 @@
 				$this->session->set_flashdata('admin_account', 'Congratulations! Your shop has been registered.');
 		
 
-				redirect('posts');
+				redirect('admins/login');
 			}
 		}
 

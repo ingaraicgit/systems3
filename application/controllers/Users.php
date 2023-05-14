@@ -10,6 +10,7 @@
 			$this->form_validation->set_rules('email','Email','required|callback_unique_email');
 			$this->form_validation->set_rules('password','Password','required');
 			$this->form_validation->set_rules('password2','Confirm Password','matches[password]');
+			$this->form_validation->set_rules('address','Address','required');
 			$this->form_validation->set_rules('phone','Phone','required');
 
 
@@ -25,7 +26,7 @@
 
 				$this->session->set_flashdata('user_account', 'Congratulations! Your account has been created.');
 
-				redirect('posts');
+				redirect('users/login');
 			}
 		}
 

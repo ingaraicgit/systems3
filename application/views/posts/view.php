@@ -7,6 +7,13 @@
 		<small class="post-date">Posted on: <?php echo $post['created_at']; ?> </small><br>
 	</div>
 
+	<?php if(!$this->session->userdata('logged_in')): ?>
+			<div class="col-md-1">
+				<a class="btn btn-success"  href="<?php echo base_url(); ?>users/login">Order</a>
+			</div>
+		
+	<?php endif;?>
+
 	<?php if($this->session->userdata('logged_in')): ?>
 		<?php if(($this->session->userdata('account')=="admin")):?>
 			<div class="col-md-1">
@@ -23,7 +30,7 @@
 	<?php if($this->session->userdata('logged_in')): ?>
 		<?php if(($this->session->userdata('account')=="user")):?>
 			<div class="col-md-1">
-				<a class="btn btn-success"  href="#">Order</a>
+				<a class="btn btn-success"  href="<?php echo base_url('posts/addToCart/'.$post['id']); ?>">Add to cart</a>
 			</div>
 		<?php endif;?>
 	<?php endif;?>
@@ -35,8 +42,6 @@
 	<div class="col-md-3">
 		<img class="post-thumb"  src="<?php echo site_url(); ?>./images/<?php echo $post['post_image']; ?>"> 
 	</div>
-
-
 
 	<div class="col-md-9">
 		<div class="post-body">

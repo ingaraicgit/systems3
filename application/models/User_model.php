@@ -8,6 +8,7 @@
 					'email' => $this->input->post('email'),
 					'username' => $this->input->post('username'),
 					'password' => $pass_encrypt2,
+					'address' => $this->input->post('address'),
 					'phone' => $this->input->post('phone')
 				);
 

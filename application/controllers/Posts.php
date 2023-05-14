@@ -1,12 +1,23 @@
 <?php
 	class Posts extends CI_Controller{
+
+		function  __construct(){
+
+        	parent::__construct();
+        	$this->load->library('cart');
+        	$this->load->model('post_model');
+    	}
 		
 		public function index(){
+
+			$data = array();
+
+			$data['posts'] = $this->post_model->getRows();
 
 			$data['title'] = 'Latest Products';
 
 			$data['posts'] = $this->post_model->get_posts();
-			$data['categories'] = $this -> post_model -> get_categories();
+			$data['categories'] = $this ->post_model-> get_categories();
 
 			$this->load->view('templates/header');
 			$this->load->view('posts/index', $data);
@@ -36,7 +47,7 @@
 
 			$this->form_validation->set_rules('title','Title','required');
 			$this->form_validation->set_rules('body','Body','required');
-
+			$this->form_validation->set_rules('price','Price','required|decimal');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header');
@@ -62,6 +73,7 @@
 
 				$this->post_model->create_post($post_image);
 
+				$this->session->set_flashdata('product_added', 'A new product has been added.');
 
 				redirect('posts');
 
@@ -75,8 +87,7 @@
 
 		public function edit($slug){
 			$data['post'] = $this->post_model->get_posts($slug);
-
-			$data['categories'] = $this -> post_model -> get_categories();
+			$data['categories'] = $this ->post_model-> get_categories();
 
 			if(empty($data['post'])){
 				show_404();
@@ -91,8 +102,31 @@
 		}
 
 		public function update(){
+
 			$this->post_model->update_post();
+
 			redirect('posts');
 		}
+
+		function addToCart($post_id){
+
+			//$post = $this->post_model->get_posts($post_id);
+	        $post = $this->post_model->getRows($post_id);
+	        
+	        // Add product to the cart
+	        $data = array(
+	            'id'    => $post['id'],
+	            'qty'    => 1,
+	            'price'    => $post['price'],
+	            'name'    => $post['title'],
+	            'post_image' => $post['post_image']
+	        );
+	        
+	        //cart object
+	        $this->cart->insert($data);
+	        
+	        // Redirect to the cart page
+	        redirect('cart/index');
+    	}
 
 	}
