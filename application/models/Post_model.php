@@ -24,6 +24,7 @@
 
 		public function create_post($post_image){
 			$slug = url_title($this->input->post('title'));
+			$status = "1";
 
 			$data = array(
 				'title' => $this->input->post('title'),
@@ -31,8 +32,8 @@
 				'price' => $this->input->post('price'),
 				'body' => $this->input->post('body'),
 				'category_id' => $this->input->post('category_id'),
-				'post_image' => $post_image
-				
+				'post_image' => $post_image,
+				'status' => $status
 
 			);
 
@@ -98,60 +99,56 @@
 	            $result = $query->result_array();
 	        }
 	        
-	        // Return fetched data
 	        return !empty($result)?$result:false;
     	}
     
-    public function getOrder($id){
-        $this->db->select('orders.*, users.name, users.email, users.phone, users.address');
-        $this->db->from($this->orders);
-        $this->db->join($this->users, 'users.id = orders.user_id', 'left');
-        $this->db->where('orders.id', $id);
-        $query = $this->db->get();
-        $result = $query->row_array();
-        
-        $this->db->select('order_items.*, posts.post_image, posts.title, posts.price');
-        $this->db->from($this->order_items);
-        $this->db->join($this->posts, 'posts.id = order_items.product_id', 'left');
-        $this->db->where('order_items.order_id', $id);
-        $query2 = $this->db->get();
-        $result['items'] = ($query2->num_rows() > 0)?$query2->result_array():array();
-        
-       return !empty($result)?$result:false;
-    }
+	    public function getOrder($id){
+	        $this->db->select('orders.*, users.name, users.email, users.phone, users.address');
+	        $this->db->from($this->orders);
+	        $this->db->join($this->users, 'users.id = orders.user_id', 'left');
+	        $this->db->where('orders.id', $id);
+	        $query = $this->db->get();
+	        $result = $query->row_array();
+	        
+	        $this->db->select('order_items.*, posts.post_image, posts.title, posts.price');
+	        $this->db->from($this->order_items);
+	        $this->db->join($this->posts, 'posts.id = order_items.product_id', 'left');
+	        $this->db->where('order_items.order_id', $id);
+	        $query2 = $this->db->get();
+	        $result['items'] = ($query2->num_rows() > 0)?$query2->result_array():array();
+	        
+	       return !empty($result)?$result:false;
+	    }
     
-    public function insertCustomer($data){
-        // Add created and modified date if not included
-        if(!array_key_exists("created", $data)){
-            $data['created'] = date("Y-m-d H:i:s");
-        }
+	    public function insertCustomer($data){
+	        // Add created and modified date if not included
+	        if(!array_key_exists("created", $data)){
+	            $data['created'] = date("Y-m-d H:i:s");
+	        }
 
-        $insert = $this->db->insert($this->users, $data);
+	        $insert = $this->db->insert($this->users, $data);
 
-        // Return the status
-        return $insert?$this->db->insert_id():false;
-    }
+	        return $insert?$this->db->insert_id():false;
+	    }
 
-    public function insertOrder($data){
-        // Add created and modified date if not included
-        if(!array_key_exists("created", $data)){
-            $data['created'] = date("Y-m-d H:i:s");
-        }
-        
-        $insert = $this->db->insert($this->orders, $data);
+	    public function insertOrder($data){
+	        // Add created and modified date if not included
+	        if(!array_key_exists("created", $data)){
+	            $data['created'] = date("Y-m-d H:i:s");
+	        }
+	        
+	        $insert = $this->db->insert($this->orders, $data);
 
-        return $insert?$this->db->insert_id():false;
-    }
-    
+	        return $insert?$this->db->insert_id():false;
+	    }
+	    
 
-    public function insertOrderItems($data = array()) {
-        
-        // Insert order items
-        $insert = $this->db->insert_batch($this->order_items, $data);
+	    public function insertOrderItems($data = array()) {
+	       
+	        $insert = $this->db->insert_batch($this->order_items, $data);
 
-        // Return the status
-        return $insert?true:false;
-    }
-    
-}
+	        return $insert?true:false;
+	    }
+	    
+	}
 

@@ -21,11 +21,9 @@
 			}else{
 				
 				$pass_encrypt2 = md5($this->input->post('password'));
-
 				$this->user_model->register($pass_encrypt2);
 
 				$this->session->set_flashdata('user_account', 'Congratulations! Your account has been created.');
-
 				redirect('users/login');
 			}
 		}
@@ -66,8 +64,6 @@
 					$this->session->set_flashdata('login_fail', 'Login is invalid. Please check your username and password.');
 					redirect('users/login');	
 				}
-
-			
 			}
 		}
 

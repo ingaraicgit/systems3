@@ -72,7 +72,6 @@
 				}
 
 				$this->post_model->create_post($post_image);
-
 				$this->session->set_flashdata('product_added', 'A new product has been added.');
 
 				redirect('posts');
@@ -93,7 +92,7 @@
 				show_404();
 			}
 
-			$data['title'] = 'Edit Post';
+			$data['title'] = 'Edit Product';
 
 			$this->load->view('templates/header');
 			$this->load->view('posts/edit', $data);
