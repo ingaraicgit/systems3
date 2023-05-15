@@ -16,6 +16,12 @@
 			<br>
 			<button type="submit" class="btn btn-success btn-block" style="margin-bottom: 5px;">Login</button>
 			<p><a class="btn btn-default btn-block" href="<?php echo site_url('/'); ?>">Cancel</a></p>
+			<br>
+			<br>
+			<div>
+				<div class="text-center">Don't have an account?</div>
+				<div class="text-center"><p><a style="font-weight: bold;" href="<?php echo base_url(); ?>admins/register">Register.</a></p></div>
+			</div>
 		</div>
 	</div>
 <?php echo form_close(); ?>

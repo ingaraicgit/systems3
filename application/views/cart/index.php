@@ -37,7 +37,7 @@ function updateCartItem(obj, rowid){
         <td><?php echo '$'.$item["price"].' €'; ?></td>
         <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
         <td class="text-right"><?php echo '$'.$item["subtotal"].' €'; ?></td>
-        <td class="text-right"><input class="btn btn-sm btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure to delete item?')?window.location.href='<?php echo base_url('cart/removeItem/'.$item["rowid"]); ?>':false;"></input> 
+        <td class="text-right"><input class="btn btn-sm btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete the item?')?window.location.href='<?php echo base_url('cart/removeItem/'.$item["rowid"]); ?>':false;"></input> 
         </td>
     </tr>
     <?php } }else{ ?>

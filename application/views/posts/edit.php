@@ -13,7 +13,8 @@
 
 <div class="form-group">
     <label>Price</label>
-    <input type="number" name="price" min="0.01" step="0.01">€
+    <br>
+    <input type="number" name="price" min="0.01" step="0.01"> €
   </div>
   
   <div class="form-group">
@@ -28,11 +29,6 @@
         <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
       <?php endforeach; ?>
     </select>
-  </div>
-
-  <div class="form-group">
-    <label>Upload Image</label>
-    <input type="file" name="userfile" size="20">
   </div>
 
   <div style="margin-bottom: 30px;">
